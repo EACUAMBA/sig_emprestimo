@@ -1,0 +1,13 @@
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\bin\Debug\Gestão de Emprestimos.exe.config
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\bin\Debug\Gestão de Emprestimos.exe
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\bin\Debug\Gestão de Emprestimos.pdb
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão_de_Emprestimos.Properties.Resources.resources
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão de Emprestimos.csproj.GenerateResource.Cache
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão de Emprestimos.exe
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão de Emprestimos.pdb
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão_de_Emprestimos.formMain.resources
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão de Emprestimos.csprojResolveAssemblyReference.cache
+c:\users\edilson a. cuamba\documents\visual studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão_de_Emprestimos.formClient.resources
+C:\Users\Edilson A. Cuamba\Documents\Visual Studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão_de_Emprestimos.InputMessageDialog.resources
+C:\Users\Edilson A. Cuamba\Documents\Visual Studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão_de_Emprestimos.FormLoan.resources
+C:\Users\Edilson A. Cuamba\Documents\Visual Studio 2015\Projects\Gestão de Emprestimos\Gestão de Emprestimos\obj\Debug\Gestão_de_Emprestimos.FormLoanList.resources
