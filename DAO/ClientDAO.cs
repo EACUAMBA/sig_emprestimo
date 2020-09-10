@@ -15,7 +15,7 @@ namespace Gestão_de_Emprestimos.DAO
     public class ClientDAO_OleDb : IClientDAO
     {
         private OleDbConnection oleDbConnection;
-        public ClientDAO_OleDb(OleDbConnection oleDbConnection)
+        public ClientDAO_OleDb()
         {
             this.oleDbConnection = Connection.getConnection();
         }
@@ -76,7 +76,7 @@ namespace Gestão_de_Emprestimos.DAO
                 client.BornDate = oleDbDataReader.GetDateTime(9);
                 client.Deleted = oleDbDataReader.GetBoolean(10);
 
-                ArrayList loans = new LoanDAO(this.oleDbConnection).findByClientCode(oleDbDataReader.GetString(0));
+                ArrayList loans = new LoanDAO().findByClientCode(oleDbDataReader.GetString(0));
 
 
                 client.Loan = loans;
@@ -123,6 +123,10 @@ namespace Gestão_de_Emprestimos.DAO
                     client.Email = oleDbDataReader.GetString(8);
                     client.BornDate = oleDbDataReader.GetDateTime(9);
                     client.Deleted = oleDbDataReader.GetBoolean(10);
+
+                    ArrayList loans = new LoanDAO().findByClientCode(oleDbDataReader.GetString(0));
+
+                    client.Loan = loans;
 
                     clients.Add(client);
                 }

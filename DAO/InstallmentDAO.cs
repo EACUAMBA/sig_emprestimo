@@ -16,7 +16,7 @@ namespace Gestão_de_Emprestimos.DAO
 
         private OleDbConnection oleDbConnection;
 
-        public InstallmentDAO(OleDbConnection oleDbConnection)
+        public InstallmentDAO()
         {
             this.oleDbConnection = Connection.getConnection();
         }
@@ -79,6 +79,41 @@ namespace Gestão_de_Emprestimos.DAO
         {
             throw new NotImplementedException();
         }
+
+        public bool setAsPaid(int code, String loanCode)
+        {
+            try
+            {
+                Connection.closeConnection(this.oleDbConnection);
+                this.oleDbConnection.Open();
+
+                String cmdText = "UPDATE installment  SET [_paid] = @paid WHERE [_code] = @code AND [_loanCode] = @loanCode";
+
+                OleDbCommand oleDbCommand = new OleDbCommand(cmdText, this.oleDbConnection);
+
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@paid", true);
+                oleDbCommand.Parameters.AddWithValue("@code", code);
+                oleDbCommand.Parameters.AddWithValue("@loanCode", loanCode);
+
+                int result = oleDbCommand.ExecuteNonQuery();
+
+                return (result > 0);
+
+            }
+            catch (OleDbException ex)
+            {
+                Util.Message.showErrorMessage("set as paid Installment \n", ex);
+            }
+            finally
+            {
+                Connection.closeConnection(this.oleDbConnection);
+            }
+
+
+            return false;
+        }
+
 
         public ArrayList findByLoanCode(String loanCode)
         {

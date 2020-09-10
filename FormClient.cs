@@ -27,9 +27,8 @@ namespace Gestão_de_Emprestimos
         public FormClient()
         {
             this.oleDbConnection = Connection.getConnection();
-            this.iClientDAO = new ClientDAO_OleDb(this.oleDbConnection);
-            this.iLoanDAO = new LoanDAO(this.oleDbConnection);
-            
+            this.iClientDAO = new ClientDAO_OleDb();
+            this.iLoanDAO = new LoanDAO();
             InitializeComponent();
         }
 
@@ -199,8 +198,6 @@ namespace Gestão_de_Emprestimos
             Status.setStatus(null, null, null, lbInformation);
         }
 
-        
-
         private void btnCleanForm_Click(object sender, EventArgs e)
         {
             cleanFormFields();
@@ -224,7 +221,6 @@ namespace Gestão_de_Emprestimos
             Status.setStatus(null, null, null, lbInformation);
         }
 
-        
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -304,7 +300,7 @@ namespace Gestão_de_Emprestimos
                 return;
             }
 
-            this.formLoanList = new FormLoanList(client);
+            this.formLoanList = new FormLoanList(client.Code);
             this.formLoanList.ShowDialog();
 
         }

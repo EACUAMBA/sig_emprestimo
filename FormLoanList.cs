@@ -1,4 +1,5 @@
-﻿using Gestão_de_Emprestimos.Model;
+﻿using Gestão_de_Emprestimos.DAO;
+using Gestão_de_Emprestimos.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,16 +15,19 @@ namespace Gestão_de_Emprestimos
 {
     public partial class FormLoanList : Form
     {
-
         private Client client;
-        public FormLoanList(Client client)
+        private String clientCode;
+        public FormLoanList(String clientCode)
         {
-            this.client = client;
+            this.clientCode = clientCode;
             InitializeComponent();
         }
 
         private void FormLoanList_Load(object sender, EventArgs e)
         {
+            this.client = new ClientDAO_OleDb().findByCode(this.clientCode);
+            lviInstallments.Items.Clear();
+            lvLoans.Items.Clear();
             lbClientName.Text = this.client.Name;
 
             fillListView();
@@ -51,14 +55,16 @@ namespace Gestão_de_Emprestimos
             lvi.SubItems.Add(Util.Convert.dateTimeToString(loan.EndDate, "dd - MMMM - yyyy"));
             lvi.SubItems.Add(Util.Convert.moneyToString(loan.ResidualValue, null));
 
+            lvi.BackColor = Color.White;
+
             if (loan.Paid)
             {
-                lvi.ForeColor = Color.GreenYellow;
+                lvi.ForeColor = Color.Green;
                 lvi.Font = new Font("Arial", 12, FontStyle.Bold);
             }
             else
             {
-                lvi.ForeColor = Color.PaleVioletRed;
+                lvi.ForeColor = Color.DarkRed;
                 lvi.Font = new Font("Arial", 12, FontStyle.Bold);
             }
 
@@ -74,14 +80,16 @@ namespace Gestão_de_Emprestimos
             lvi.SubItems.Add(Util.Convert.moneyToString(installment.Value, null));
             lvi.SubItems.Add(Util.Convert.dateTimeToString(installment.DateToPay, "dd - MMMM - yyyy"));
 
+            lvi.BackColor = Color.White;
+
             if (installment.Paid)
             {
-                lvi.ForeColor = Color.GreenYellow;
+                lvi.ForeColor = Color.Green;
                 lvi.Font = new Font("Arial", 12, FontStyle.Bold);
             }
             else
             {
-                lvi.ForeColor = Color.PaleVioletRed;
+                lvi.ForeColor = Color.DarkRed;
                 lvi.Font = new Font("Arial", 12, FontStyle.Bold);
             }
 
@@ -116,16 +124,41 @@ namespace Gestão_de_Emprestimos
             }
         }
 
-        private void btnDefineAsPaid_Click(object sender, EventArgs e)
+        private void btnDefineLoanAsPaid_Click(object sender, EventArgs e)
         {
             String loanCode = Util.GetFromListViewes.getCodeSelectedRow(lvLoans);
-            
+            if (loanCode == null) return;
 
-            String installmentCode = Util.GetFromListViewes.getCodeSelectedRow(lviInstallments);
 
-            if(loanCode != "" && loanCode != null)
+            DialogResult dialogResult =  MessageBox.Show("Voçe realmente quer colocar este emprestimo como pago?", "Aviso", MessageBoxButtons.OKCancel);
+           
+            if(dialogResult == DialogResult.OK)
             {
-                
+                new LoanDAO().setAsPaid(loanCode, this.client.Code);
+                FormLoanList_Load(null, null);
+
+            }
+
+        }
+
+        private void btnDefineInstallmentAsPaid_Click(object sender, EventArgs e)
+        {
+            String installmentCode = Util.GetFromListViewes.getCodeSelectedRow(lviInstallments);
+            if (installmentCode == null) return;
+
+            String loanCode = (String) lviInstallments.SelectedItems[0].SubItems[1].Text;
+            if (loanCode == null|| loanCode == "") return;
+
+            MessageBox.Show(loanCode);
+
+
+            DialogResult dialogResult = MessageBox.Show("Voçe realmente quer colocar esta parcela como paga?", "Aviso", MessageBoxButtons.OKCancel);
+
+            if (dialogResult == DialogResult.OK)
+            {
+                new InstallmentDAO().setAsPaid(int.Parse(installmentCode), loanCode);
+               
+                FormLoanList_Load(null, null);
             }
         }
     }

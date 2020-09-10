@@ -16,11 +16,10 @@ namespace Gestão_de_Emprestimos.DAO
     {
         private OleDbConnection oleDbConnection;
         private IInstallmentDAO iInstallmentDAO;
-        public LoanDAO(OleDbConnection oleDbConnection)
+        public LoanDAO()
         {
-           
             this.oleDbConnection = Connection.getConnection();
-            this.iInstallmentDAO = new InstallmentDAO(oleDbConnection);
+            this.iInstallmentDAO = new InstallmentDAO();
         }
 
         public bool delete(Loan loan)
@@ -183,7 +182,7 @@ namespace Gestão_de_Emprestimos.DAO
                     loan.Deleted = oleDbDataReader.GetBoolean(8);
                     loan.Message = oleDbDataReader.GetValue(9) != DBNull.Value ? (String)oleDbDataReader.GetValue(9) : string.Empty;
 
-                    ArrayList installments = new InstallmentDAO(this.oleDbConnection).findByLoanCode(loan.Code);
+                    ArrayList installments = new InstallmentDAO().findByLoanCode(loan.Code);
 
                     loan.Installment = installments;
                     loans.Add(loan);
@@ -290,6 +289,38 @@ namespace Gestão_de_Emprestimos.DAO
             catch (OleDbException ex)
             {
                 Util.Message.showErrorMessage("Update Loan", ex);
+            }
+            finally
+            {
+                Util.Connection.closeConnection(this.oleDbConnection);
+            }
+
+            return false;
+        }
+
+        public bool setAsPaid(String code, String clientCode)
+        {
+            try
+            {
+                Connection.closeConnection(this.oleDbConnection);
+                this.oleDbConnection.Open();
+
+                String cmdText = "UPDATE loan SET [_paid] = @paid WHERE [_code] = @code AND [_clientCode] = @clientCode";
+
+                OleDbCommand oleDbCommand = new OleDbCommand(cmdText, this.oleDbConnection);
+
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@paid", true);
+                oleDbCommand.Parameters.AddWithValue("@code", code);
+                oleDbCommand.Parameters.AddWithValue("@clientCode", clientCode);
+
+                int result = oleDbCommand.ExecuteNonQuery();
+
+                return (result > 0);
+            }
+            catch (OleDbException ex)
+            {
+                Util.Message.showErrorMessage("Set as paid Loan", ex);
             }
             finally
             {
