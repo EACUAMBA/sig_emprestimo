@@ -23,11 +23,13 @@ namespace Gestão_de_Emprestimos
         private IClientDAO iClientDAO;
         private ILoanDAO iLoanDAO;
         private Form formLoan;
+        private Form formLoanList;
         public FormClient()
         {
             this.oleDbConnection = Connection.getConnection();
             this.iClientDAO = new ClientDAO_OleDb(this.oleDbConnection);
             this.iLoanDAO = new LoanDAO(this.oleDbConnection);
+            
             InitializeComponent();
         }
 
@@ -291,6 +293,19 @@ namespace Gestão_de_Emprestimos
 
         private void btnSeeLoan_Click(object sender, EventArgs e)
         {
+            String clientCode = GetFromListViewes.getCodeSelectedRow(lvClients);
+            if (clientCode == null) return;
+
+            Client client = this.iClientDAO.findByCode(clientCode);
+
+            if(client.Loan == null)
+            {
+                Util.Message.showErrorMessage("Cliente não tem emprestimos realizados, por favor realize um para ver os emprestimos dele.", null);
+                return;
+            }
+
+            this.formLoanList = new FormLoanList(client);
+            this.formLoanList.ShowDialog();
 
         }
     }

@@ -19,7 +19,7 @@ namespace Gestão_de_Emprestimos.DAO
         public LoanDAO(OleDbConnection oleDbConnection)
         {
            
-            this.oleDbConnection = oleDbConnection;
+            this.oleDbConnection = Connection.getConnection();
             this.iInstallmentDAO = new InstallmentDAO(oleDbConnection);
         }
 
@@ -27,6 +27,7 @@ namespace Gestão_de_Emprestimos.DAO
         {
             try
             {
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
 
                 String cmdText = "UPDATE loan SET [_deleted] =  @deleted, [_message] =@message WHERE [_code] = @code AND [_clientCode] = @clientCode";
@@ -62,6 +63,7 @@ namespace Gestão_de_Emprestimos.DAO
 
             try
             {
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
                 String cmdText = "SELECT * FROM loan WHERE [_clientCode] = @clientCode AND [_code] = @code";
 
@@ -109,6 +111,7 @@ namespace Gestão_de_Emprestimos.DAO
 
             try
             {
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
                 String cmdText = "SELECT * FROM loan";
 
@@ -155,6 +158,7 @@ namespace Gestão_de_Emprestimos.DAO
 
             try
             {
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
                 String cmdText = "SELECT * FROM loan WHERE [_clientCode] = @clientCode";
 
@@ -179,8 +183,9 @@ namespace Gestão_de_Emprestimos.DAO
                     loan.Deleted = oleDbDataReader.GetBoolean(8);
                     loan.Message = oleDbDataReader.GetValue(9) != DBNull.Value ? (String)oleDbDataReader.GetValue(9) : string.Empty;
 
+                    ArrayList installments = new InstallmentDAO(this.oleDbConnection).findByLoanCode(loan.Code);
 
-
+                    loan.Installment = installments;
                     loans.Add(loan);
                 }
 
@@ -192,7 +197,7 @@ namespace Gestão_de_Emprestimos.DAO
             }
             finally
             {
-                Connection.closeConnection(this.oleDbConnection, oleDbDataReader);
+                Connection.closeConnection(this.oleDbConnection);
             }
 
             return new ArrayList();
@@ -203,7 +208,7 @@ namespace Gestão_de_Emprestimos.DAO
             try
             {
 
-                
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
 
                 String cmdText = "INSERT INTO loan([_code], [_clientCode], [_capital], [_startDate], [_endDate], [_percent], [_residualValue]) VALUES (@code, @clientCode, @capital, @startDate, @endDate, @percent, @residualValue)";
@@ -262,6 +267,7 @@ namespace Gestão_de_Emprestimos.DAO
         {
             try
             {
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
 
                 String cmdText = "UPDATE loan SET [_capital] =  @capital, [_startDate] =@startDate, [_endDate] = @endDate, [_percent] = @percent, [_residualValue] = @residualValue WHERE [_code] = @code AND [_clientCode] = @clientCode";

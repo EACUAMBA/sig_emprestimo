@@ -18,7 +18,7 @@ namespace Gestão_de_Emprestimos.DAO
 
         public InstallmentDAO(OleDbConnection oleDbConnection)
         {
-            this.oleDbConnection = oleDbConnection;
+            this.oleDbConnection = Connection.getConnection();
         }
 
         public bool delete(int code, string loanCode)
@@ -45,7 +45,7 @@ namespace Gestão_de_Emprestimos.DAO
         {
             try
             {
-                this.oleDbConnection.Close();
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
 
                 String cmdText = "INSERT INTO installment ([_code], [_loanCode], [_value], [_dateToPay]) VALUES (@code, @loanCode, @value, @dateToPay)";
@@ -78,6 +78,49 @@ namespace Gestão_de_Emprestimos.DAO
         public bool update(Installment installment)
         {
             throw new NotImplementedException();
+        }
+
+        public ArrayList findByLoanCode(String loanCode)
+        {
+            OleDbDataReader oleDbDataReader = null;
+            ArrayList installments = new ArrayList();
+            try
+            {
+                Connection.closeConnection(this.oleDbConnection);
+                this.oleDbConnection.Open();
+
+                String cmdText = "SELECT * FROM installment WHERE [_loanCode] = @loanCode";
+
+                OleDbCommand oleDbCommand = new OleDbCommand(cmdText, this.oleDbConnection);
+
+                oleDbCommand.Prepare();
+                oleDbCommand.Parameters.AddWithValue("@loanCode", loanCode);
+
+                oleDbDataReader = oleDbCommand.ExecuteReader();
+
+                while (oleDbDataReader.Read())
+                {
+                    Installment installment= new Installment();
+                    installment.Code = oleDbDataReader.GetInt32(0);
+                    installment.LoanCode = oleDbDataReader.GetString(1);
+                    installment.Value = oleDbDataReader.GetDouble(2);
+                    installment.DateToPay = oleDbDataReader.GetDateTime(3);
+                    installment.Paid = oleDbDataReader.GetBoolean(4);
+
+                    installments.Add(installment);
+                }
+
+                return installments;
+            }catch(OleDbException ex)
+            {
+                Util.Message.showErrorMessage("findByInstallmentCode", ex);
+            }
+            finally
+            {
+                Connection.closeConnection(this.oleDbConnection);
+            }
+
+            return null;
         }
     }
 }

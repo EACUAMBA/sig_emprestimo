@@ -17,7 +17,7 @@ namespace Gestão_de_Emprestimos.DAO
         private OleDbConnection oleDbConnection;
         public ClientDAO_OleDb(OleDbConnection oleDbConnection)
         {
-            this.oleDbConnection = oleDbConnection;
+            this.oleDbConnection = Connection.getConnection();
         }
 
         public bool delete(string code)
@@ -76,6 +76,11 @@ namespace Gestão_de_Emprestimos.DAO
                 client.BornDate = oleDbDataReader.GetDateTime(9);
                 client.Deleted = oleDbDataReader.GetBoolean(10);
 
+                ArrayList loans = new LoanDAO(this.oleDbConnection).findByClientCode(oleDbDataReader.GetString(0));
+
+
+                client.Loan = loans;
+
 
                 return client;
             }
@@ -85,7 +90,7 @@ namespace Gestão_de_Emprestimos.DAO
             }
             finally
             {
-                Connection.closeConnection(this.oleDbConnection, oleDbDataReader);
+                Connection.closeConnection(this.oleDbConnection);
             }
             return null;
         }
@@ -96,6 +101,7 @@ namespace Gestão_de_Emprestimos.DAO
             ArrayList clients = new ArrayList();
             try
             {
+                Connection.closeConnection(this.oleDbConnection);
                 this.oleDbConnection.Open();
                 String cmdText = "SELECT * FROM client";
 

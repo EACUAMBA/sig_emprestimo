@@ -19,7 +19,7 @@ namespace Gestão_de_Emprestimos.Util
         }
         public static String moneyToString(Double value, String format)
         {
-            String convertedDate = value.ToString(CultureInfo.CreateSpecificCulture("PT-MZ"));
+            String convertedDate = value.ToString("C", CultureInfo.CreateSpecificCulture("pt-mz"));
             if (format != null)
             {
                 convertedDate = value.ToString(format);

@@ -29,6 +29,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbEndDate = new System.Windows.Forms.Label();
             this.lbPercent = new System.Windows.Forms.Label();
             this.lbStartDate = new System.Windows.Forms.Label();
@@ -38,14 +41,21 @@
             this.lbCode = new System.Windows.Forms.Label();
             this.panelMain = new System.Windows.Forms.Panel();
             this.gbGeneratedInstallment = new System.Windows.Forms.GroupBox();
+            this.dgvAction = new System.Windows.Forms.GroupBox();
+            this.btnUpdateDataGrid = new System.Windows.Forms.Button();
+            this.btnRemoveRow = new System.Windows.Forms.Button();
+            this.btnNewRow = new System.Windows.Forms.Button();
             this.dgvParcelas = new System.Windows.Forms.DataGridView();
             this.gbOperations = new System.Windows.Forms.GroupBox();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnCleanForm = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lbInformation = new System.Windows.Forms.Label();
             this.gbDataClient = new System.Windows.Forms.GroupBox();
+            this.lbValueWithPercent = new System.Windows.Forms.Label();
+            this.maskedTxtBoxResidualValue = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTxtBoxCapital = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTxtBoxPercent = new System.Windows.Forms.MaskedTextBox();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dtpFirstPayment = new System.Windows.Forms.DateTimePicker();
@@ -57,55 +67,46 @@
             this.checkBoxInstallment = new System.Windows.Forms.CheckBox();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.lbCapital = new System.Windows.Forms.Label();
-            this.maskedTxtBoxPercent = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTxtBoxCapital = new System.Windows.Forms.MaskedTextBox();
-            this.maskedTxtBoxResidualValue = new System.Windows.Forms.MaskedTextBox();
             this.columnCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnLoanCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDateToPay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbValueWithPercent = new System.Windows.Forms.Label();
-            this.btnNewRow = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.dgvAction = new System.Windows.Forms.GroupBox();
-            this.btnRemoveRow = new System.Windows.Forms.Button();
-            this.btnUpdateDataGrid = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.gbGeneratedInstallment.SuspendLayout();
+            this.dgvAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
             this.gbOperations.SuspendLayout();
             this.gbDataClient.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.dgvAction.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbEndDate
             // 
             this.lbEndDate.AutoSize = true;
-            this.lbEndDate.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEndDate.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEndDate.Location = new System.Drawing.Point(21, 196);
             this.lbEndDate.Name = "lbEndDate";
-            this.lbEndDate.Size = new System.Drawing.Size(162, 18);
+            this.lbEndDate.Size = new System.Drawing.Size(163, 20);
             this.lbEndDate.TabIndex = 26;
             this.lbEndDate.Text = "Data de Pagamento:";
             // 
             // lbPercent
             // 
             this.lbPercent.AutoSize = true;
-            this.lbPercent.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPercent.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbPercent.Location = new System.Drawing.Point(21, 127);
             this.lbPercent.Name = "lbPercent";
-            this.lbPercent.Size = new System.Drawing.Size(51, 18);
+            this.lbPercent.Size = new System.Drawing.Size(53, 20);
             this.lbPercent.TabIndex = 24;
             this.lbPercent.Text = "Juros:";
             // 
             // lbStartDate
             // 
             this.lbStartDate.AutoSize = true;
-            this.lbStartDate.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStartDate.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbStartDate.Location = new System.Drawing.Point(21, 163);
             this.lbStartDate.Name = "lbStartDate";
-            this.lbStartDate.Size = new System.Drawing.Size(167, 18);
+            this.lbStartDate.Size = new System.Drawing.Size(168, 20);
             this.lbStartDate.TabIndex = 22;
             this.lbStartDate.Text = "Data de Emprestimo: ";
             // 
@@ -128,27 +129,26 @@
             // lbClientCode
             // 
             this.lbClientCode.AutoSize = true;
-            this.lbClientCode.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbClientCode.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbClientCode.Location = new System.Drawing.Point(21, 63);
             this.lbClientCode.Name = "lbClientCode";
-            this.lbClientCode.Size = new System.Drawing.Size(145, 18);
+            this.lbClientCode.Size = new System.Drawing.Size(147, 20);
             this.lbClientCode.TabIndex = 8;
             this.lbClientCode.Text = "Codigo do Cliente:";
             // 
             // lbCode
             // 
             this.lbCode.AutoSize = true;
-            this.lbCode.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCode.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCode.Location = new System.Drawing.Point(21, 28);
             this.lbCode.Name = "lbCode";
-            this.lbCode.Size = new System.Drawing.Size(66, 18);
+            this.lbCode.Size = new System.Drawing.Size(67, 20);
             this.lbCode.TabIndex = 0;
             this.lbCode.Text = "Codigo:";
             // 
             // panelMain
             // 
             this.panelMain.AutoScroll = true;
-            this.panelMain.Controls.Add(this.button2);
             this.panelMain.Controls.Add(this.gbGeneratedInstallment);
             this.panelMain.Controls.Add(this.gbOperations);
             this.panelMain.Controls.Add(this.lbInformation);
@@ -171,6 +171,52 @@
             this.gbGeneratedInstallment.TabStop = false;
             this.gbGeneratedInstallment.Text = "Parcelas Geradas";
             // 
+            // dgvAction
+            // 
+            this.dgvAction.Controls.Add(this.btnUpdateDataGrid);
+            this.dgvAction.Controls.Add(this.btnRemoveRow);
+            this.dgvAction.Controls.Add(this.btnNewRow);
+            this.dgvAction.Enabled = false;
+            this.dgvAction.Location = new System.Drawing.Point(1058, 15);
+            this.dgvAction.Name = "dgvAction";
+            this.dgvAction.Size = new System.Drawing.Size(140, 331);
+            this.dgvAction.TabIndex = 5;
+            this.dgvAction.TabStop = false;
+            this.dgvAction.Text = "Ações";
+            // 
+            // btnUpdateDataGrid
+            // 
+            this.btnUpdateDataGrid.Enabled = false;
+            this.btnUpdateDataGrid.Location = new System.Drawing.Point(6, 118);
+            this.btnUpdateDataGrid.Name = "btnUpdateDataGrid";
+            this.btnUpdateDataGrid.Size = new System.Drawing.Size(128, 40);
+            this.btnUpdateDataGrid.TabIndex = 7;
+            this.btnUpdateDataGrid.Text = "Update Table";
+            this.btnUpdateDataGrid.UseVisualStyleBackColor = true;
+            this.btnUpdateDataGrid.Click += new System.EventHandler(this.btnUpdateDataGrid_Click);
+            // 
+            // btnRemoveRow
+            // 
+            this.btnRemoveRow.Enabled = false;
+            this.btnRemoveRow.Location = new System.Drawing.Point(6, 72);
+            this.btnRemoveRow.Name = "btnRemoveRow";
+            this.btnRemoveRow.Size = new System.Drawing.Size(128, 40);
+            this.btnRemoveRow.TabIndex = 6;
+            this.btnRemoveRow.Text = "Remove Row";
+            this.btnRemoveRow.UseVisualStyleBackColor = true;
+            this.btnRemoveRow.Click += new System.EventHandler(this.btnRemoveRow_Click);
+            // 
+            // btnNewRow
+            // 
+            this.btnNewRow.Enabled = false;
+            this.btnNewRow.Location = new System.Drawing.Point(6, 26);
+            this.btnNewRow.Name = "btnNewRow";
+            this.btnNewRow.Size = new System.Drawing.Size(128, 40);
+            this.btnNewRow.TabIndex = 5;
+            this.btnNewRow.Text = "Add Row";
+            this.btnNewRow.UseVisualStyleBackColor = true;
+            this.btnNewRow.Click += new System.EventHandler(this.btnNewRow_Click);
+            // 
             // dgvParcelas
             // 
             this.dgvParcelas.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
@@ -189,7 +235,6 @@
             // 
             // gbOperations
             // 
-            this.gbOperations.Controls.Add(this.btnUpdate);
             this.gbOperations.Controls.Add(this.btnBack);
             this.gbOperations.Controls.Add(this.btnCleanForm);
             this.gbOperations.Controls.Add(this.btnSave);
@@ -201,16 +246,6 @@
             this.gbOperations.TabStop = false;
             this.gbOperations.Text = "Operações";
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(161, 26);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(150, 40);
-            this.btnUpdate.TabIndex = 9;
-            this.btnUpdate.Text = "Actualizar";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            // 
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,11 +255,12 @@
             this.btnBack.TabIndex = 6;
             this.btnBack.Text = "Voltar ao Formulário anterior";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnCleanForm
             // 
             this.btnCleanForm.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCleanForm.Location = new System.Drawing.Point(6, 138);
+            this.btnCleanForm.Location = new System.Drawing.Point(3, 110);
             this.btnCleanForm.Name = "btnCleanForm";
             this.btnCleanForm.Size = new System.Drawing.Size(308, 40);
             this.btnCleanForm.TabIndex = 4;
@@ -237,7 +273,7 @@
             this.btnSave.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(5, 26);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(150, 40);
+            this.btnSave.Size = new System.Drawing.Size(303, 57);
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Salvar";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -280,13 +316,53 @@
             this.gbDataClient.TabStop = false;
             this.gbDataClient.Text = "Dados do Cliente";
             // 
+            // lbValueWithPercent
+            // 
+            this.lbValueWithPercent.AutoSize = true;
+            this.lbValueWithPercent.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbValueWithPercent.Location = new System.Drawing.Point(254, 127);
+            this.lbValueWithPercent.Name = "lbValueWithPercent";
+            this.lbValueWithPercent.Size = new System.Drawing.Size(99, 19);
+            this.lbValueWithPercent.TabIndex = 39;
+            this.lbValueWithPercent.Text = "Va. C/ J.:";
+            // 
+            // maskedTxtBoxResidualValue
+            // 
+            this.maskedTxtBoxResidualValue.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maskedTxtBoxResidualValue.Location = new System.Drawing.Point(658, 68);
+            this.maskedTxtBoxResidualValue.Mask = "000,000,000,000,00 MZN";
+            this.maskedTxtBoxResidualValue.Name = "maskedTxtBoxResidualValue";
+            this.maskedTxtBoxResidualValue.Size = new System.Drawing.Size(214, 26);
+            this.maskedTxtBoxResidualValue.TabIndex = 38;
+            // 
+            // maskedTxtBoxCapital
+            // 
+            this.maskedTxtBoxCapital.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maskedTxtBoxCapital.Location = new System.Drawing.Point(194, 91);
+            this.maskedTxtBoxCapital.Mask = "000,000,000,000,00 MZN";
+            this.maskedTxtBoxCapital.Name = "maskedTxtBoxCapital";
+            this.maskedTxtBoxCapital.Size = new System.Drawing.Size(326, 26);
+            this.maskedTxtBoxCapital.TabIndex = 37;
+            // 
+            // maskedTxtBoxPercent
+            // 
+            this.maskedTxtBoxPercent.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maskedTxtBoxPercent.Location = new System.Drawing.Point(194, 124);
+            this.maskedTxtBoxPercent.Mask = "00 %";
+            this.maskedTxtBoxPercent.Name = "maskedTxtBoxPercent";
+            this.maskedTxtBoxPercent.Size = new System.Drawing.Size(54, 26);
+            this.maskedTxtBoxPercent.TabIndex = 6;
+            this.maskedTxtBoxPercent.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTxtBoxPercent_MaskInputRejected);
+            this.maskedTxtBoxPercent.TextChanged += new System.EventHandler(this.maskedTxtBoxPercent_TextChanged);
+            // 
             // dtpStartDate
             // 
             this.dtpStartDate.CustomFormat = " dd/ MMMM / yyyy";
+            this.dtpStartDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(194, 156);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(326, 27);
+            this.dtpStartDate.Size = new System.Drawing.Size(326, 26);
             this.dtpStartDate.TabIndex = 33;
             this.dtpStartDate.Value = new System.DateTime(2020, 9, 5, 19, 23, 3, 0);
             // 
@@ -309,10 +385,11 @@
             // dtpFirstPayment
             // 
             this.dtpFirstPayment.CustomFormat = "dd/MMMMM/yyyy";
+            this.dtpFirstPayment.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFirstPayment.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFirstPayment.Location = new System.Drawing.Point(132, 128);
             this.dtpFirstPayment.Name = "dtpFirstPayment";
-            this.dtpFirstPayment.Size = new System.Drawing.Size(214, 27);
+            this.dtpFirstPayment.Size = new System.Drawing.Size(214, 26);
             this.dtpFirstPayment.TabIndex = 42;
             // 
             // lbFirstPayment
@@ -336,10 +413,11 @@
             // 
             // comboBoxFrequency
             // 
+            this.comboBoxFrequency.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxFrequency.FormattingEnabled = true;
             this.comboBoxFrequency.Location = new System.Drawing.Point(132, 88);
             this.comboBoxFrequency.Name = "comboBoxFrequency";
-            this.comboBoxFrequency.Size = new System.Drawing.Size(214, 28);
+            this.comboBoxFrequency.Size = new System.Drawing.Size(214, 26);
             this.comboBoxFrequency.TabIndex = 39;
             this.comboBoxFrequency.SelectedIndexChanged += new System.EventHandler(this.comboBoxFrequency_SelectedIndexChanged);
             // 
@@ -375,10 +453,11 @@
             // dtpEndDate
             // 
             this.dtpEndDate.CustomFormat = "dd/MMMM/yyyy";
+            this.dtpEndDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEndDate.Location = new System.Drawing.Point(194, 189);
             this.dtpEndDate.Name = "dtpEndDate";
-            this.dtpEndDate.Size = new System.Drawing.Size(326, 27);
+            this.dtpEndDate.Size = new System.Drawing.Size(326, 26);
             this.dtpEndDate.TabIndex = 33;
             this.dtpEndDate.Value = new System.DateTime(2020, 9, 5, 0, 0, 0, 0);
             this.dtpEndDate.ValueChanged += new System.EventHandler(this.dtpEndDate_ValueChanged);
@@ -386,52 +465,32 @@
             // lbCapital
             // 
             this.lbCapital.AutoSize = true;
-            this.lbCapital.Font = new System.Drawing.Font("Gilroy Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCapital.Font = new System.Drawing.Font("Gilroy ExtraBold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCapital.Location = new System.Drawing.Point(21, 95);
             this.lbCapital.Name = "lbCapital";
-            this.lbCapital.Size = new System.Drawing.Size(65, 18);
+            this.lbCapital.Size = new System.Drawing.Size(69, 20);
             this.lbCapital.TabIndex = 31;
             this.lbCapital.Text = "Capital:";
             // 
-            // maskedTxtBoxPercent
-            // 
-            this.maskedTxtBoxPercent.Location = new System.Drawing.Point(194, 124);
-            this.maskedTxtBoxPercent.Mask = "00 %";
-            this.maskedTxtBoxPercent.Name = "maskedTxtBoxPercent";
-            this.maskedTxtBoxPercent.Size = new System.Drawing.Size(54, 27);
-            this.maskedTxtBoxPercent.TabIndex = 6;
-            this.maskedTxtBoxPercent.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.maskedTxtBoxPercent_MaskInputRejected);
-            this.maskedTxtBoxPercent.TextChanged += new System.EventHandler(this.maskedTxtBoxPercent_TextChanged);
-            // 
-            // maskedTxtBoxCapital
-            // 
-            this.maskedTxtBoxCapital.Location = new System.Drawing.Point(194, 91);
-            this.maskedTxtBoxCapital.Mask = "000,000,000,000,00 MZN";
-            this.maskedTxtBoxCapital.Name = "maskedTxtBoxCapital";
-            this.maskedTxtBoxCapital.Size = new System.Drawing.Size(326, 27);
-            this.maskedTxtBoxCapital.TabIndex = 37;
-            // 
-            // maskedTxtBoxResidualValue
-            // 
-            this.maskedTxtBoxResidualValue.Location = new System.Drawing.Point(658, 68);
-            this.maskedTxtBoxResidualValue.Mask = "000,000,000,000,00 MZN";
-            this.maskedTxtBoxResidualValue.Name = "maskedTxtBoxResidualValue";
-            this.maskedTxtBoxResidualValue.Size = new System.Drawing.Size(214, 27);
-            this.maskedTxtBoxResidualValue.TabIndex = 38;
-            // 
             // columnCode
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.columnCode.DefaultCellStyle = dataGridViewCellStyle1;
             this.columnCode.HeaderText = "Codigo";
             this.columnCode.Name = "columnCode";
             // 
             // columnLoanCode
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.columnLoanCode.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnLoanCode.HeaderText = "Codigo do Emprestimo";
             this.columnLoanCode.Name = "columnLoanCode";
             this.columnLoanCode.Width = 200;
             // 
             // columnValue
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.columnValue.DefaultCellStyle = dataGridViewCellStyle3;
             this.columnValue.HeaderText = "Valor a Pagar";
             this.columnValue.Name = "columnValue";
             this.columnValue.Width = 300;
@@ -441,66 +500,6 @@
             this.columnDateToPay.HeaderText = "Data Para Pagar";
             this.columnDateToPay.Name = "columnDateToPay";
             this.columnDateToPay.Width = 400;
-            // 
-            // lbValueWithPercent
-            // 
-            this.lbValueWithPercent.AutoSize = true;
-            this.lbValueWithPercent.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbValueWithPercent.Location = new System.Drawing.Point(254, 127);
-            this.lbValueWithPercent.Name = "lbValueWithPercent";
-            this.lbValueWithPercent.Size = new System.Drawing.Size(99, 19);
-            this.lbValueWithPercent.TabIndex = 39;
-            this.lbValueWithPercent.Text = "Va. C/ J.:";
-            // 
-            // btnNewRow
-            // 
-            this.btnNewRow.Location = new System.Drawing.Point(6, 26);
-            this.btnNewRow.Name = "btnNewRow";
-            this.btnNewRow.Size = new System.Drawing.Size(128, 40);
-            this.btnNewRow.TabIndex = 5;
-            this.btnNewRow.Text = "Add Row";
-            this.btnNewRow.UseVisualStyleBackColor = true;
-            this.btnNewRow.Click += new System.EventHandler(this.btnNewRow_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1122, 243);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // dgvAction
-            // 
-            this.dgvAction.Controls.Add(this.btnUpdateDataGrid);
-            this.dgvAction.Controls.Add(this.btnRemoveRow);
-            this.dgvAction.Controls.Add(this.btnNewRow);
-            this.dgvAction.Location = new System.Drawing.Point(1058, 15);
-            this.dgvAction.Name = "dgvAction";
-            this.dgvAction.Size = new System.Drawing.Size(140, 331);
-            this.dgvAction.TabIndex = 5;
-            this.dgvAction.TabStop = false;
-            this.dgvAction.Text = "Ações";
-            // 
-            // btnRemoveRow
-            // 
-            this.btnRemoveRow.Location = new System.Drawing.Point(6, 72);
-            this.btnRemoveRow.Name = "btnRemoveRow";
-            this.btnRemoveRow.Size = new System.Drawing.Size(128, 40);
-            this.btnRemoveRow.TabIndex = 6;
-            this.btnRemoveRow.Text = "Remove Row";
-            this.btnRemoveRow.UseVisualStyleBackColor = true;
-            this.btnRemoveRow.Click += new System.EventHandler(this.btnRemoveRow_Click);
-            // 
-            // btnUpdateDataGrid
-            // 
-            this.btnUpdateDataGrid.Location = new System.Drawing.Point(6, 118);
-            this.btnUpdateDataGrid.Name = "btnUpdateDataGrid";
-            this.btnUpdateDataGrid.Size = new System.Drawing.Size(128, 40);
-            this.btnUpdateDataGrid.TabIndex = 7;
-            this.btnUpdateDataGrid.Text = "Update Table";
-            this.btnUpdateDataGrid.UseVisualStyleBackColor = true;
             // 
             // FormLoan
             // 
@@ -514,13 +513,13 @@
             this.Load += new System.EventHandler(this.FormLoan_Load);
             this.panelMain.ResumeLayout(false);
             this.gbGeneratedInstallment.ResumeLayout(false);
+            this.dgvAction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).EndInit();
             this.gbOperations.ResumeLayout(false);
             this.gbDataClient.ResumeLayout(false);
             this.gbDataClient.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.dgvAction.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -543,7 +542,6 @@
         private System.Windows.Forms.GroupBox gbGeneratedInstallment;
         private System.Windows.Forms.DataGridView dgvParcelas;
         private System.Windows.Forms.GroupBox gbOperations;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnCleanForm;
         private System.Windows.Forms.Button btnSave;
@@ -557,15 +555,14 @@
         private System.Windows.Forms.MaskedTextBox maskedTxtBoxPercent;
         private System.Windows.Forms.MaskedTextBox maskedTxtBoxResidualValue;
         private System.Windows.Forms.MaskedTextBox maskedTxtBoxCapital;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnLoanCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnDateToPay;
         private System.Windows.Forms.Label lbValueWithPercent;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox dgvAction;
         private System.Windows.Forms.Button btnUpdateDataGrid;
         private System.Windows.Forms.Button btnRemoveRow;
         private System.Windows.Forms.Button btnNewRow;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnLoanCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnDateToPay;
     }
 }

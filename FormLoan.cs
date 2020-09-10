@@ -205,7 +205,12 @@ namespace Gestão_de_Emprestimos
             }
 
             if (!this.iLoanDAO.save(loan)) Status.setStatus("Loan not Saved!", Color.Red, null, lbInformation);
-            
+
+            MessageBox.Show("Salvo com sucesso!");
+            this.Close();
+
+
+
             Status.setStatus(null, null, null, lbInformation);
         }
 
@@ -232,7 +237,7 @@ namespace Gestão_de_Emprestimos
 
 
             DateTime endDate = GetFromDateTimePicker.toDateTime(dtpEndDate, lbEndDate);
-            if (endDate == new DateTime(1910, 1, 1)) return null;
+            if (endDate == new DateTime()) return null;
 
             Loan loan = new Loan();
             loan.Code = Generator.newCode(this.iLoanDAO.findByClientCode(clientCode), "LN");
@@ -362,7 +367,7 @@ namespace Gestão_de_Emprestimos
 
         private void btnNewRow_Click(object sender, EventArgs e)
         {
-            dgvParcelas.Rows.Add(1);
+            
         }
 
         private void btnRemoveRow_Click(object sender, EventArgs e)
@@ -372,7 +377,21 @@ namespace Gestão_de_Emprestimos
             {
                 this.dgvParcelas.Rows.RemoveAt(this.dgvParcelas.SelectedRows[0].Index);
             }
+            else
+            {
+                MessageBox.Show("Selecione uma linha, clique na primeira coluna a esquerda!");
+            }
             
+        }
+
+        private void btnUpdateDataGrid_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
